@@ -6,8 +6,13 @@ import { BackendService } from '../../../app/backend.service';
   templateUrl: './tickets.component.html'
 })
 export class TicketsComponent {
-  tickets = this.backend.tickets();
-  users = this.backend.users();
+  tickets$ = this.backend.tickets();
 
   constructor(private backend: BackendService) {}
+
+  addTicket(description: string): void {
+    if (description.length > 0) {
+      this.backend.newTicket({ description });
+    }
+  }
 }

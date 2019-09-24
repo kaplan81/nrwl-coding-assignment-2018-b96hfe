@@ -73,9 +73,13 @@ export class BackendService {
     const newTicket: Ticket = {
       id: ++this.lastId,
       description: payload.description,
-      assigneeId: null,
+      // First we assign by default to Victor.
+      assigneeId: 111,
       completed: false
     };
+
+    // No time to implement state. This is a provisional shortcut.
+    this.storedTickets.push(newTicket);
 
     return of(newTicket).pipe(
       delay(randomDelay()),

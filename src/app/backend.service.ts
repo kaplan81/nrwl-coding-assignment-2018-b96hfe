@@ -27,6 +27,7 @@ function randomDelay() {
   providedIn: 'root'
 })
 export class BackendService {
+  lastId = 1;
   storedTickets: Ticket[] = [
     {
       id: 0,
@@ -41,24 +42,21 @@ export class BackendService {
       completed: false
     }
   ];
-
   storedUsers: User[] = [{ id: 111, name: 'Victor' }];
-
-  lastId = 1;
-
-  tickets() {
-    return of(this.storedTickets).pipe(delay(randomDelay()));
-  }
 
   ticket(id: number): Observable<Ticket> {
     return of(this.findTicketById(id)).pipe(delay(randomDelay()));
   }
 
-  users() {
+  tickets(): Observable<Ticket[]> {
+    return of(this.storedTickets).pipe(delay(randomDelay()));
+  }
+
+  users(): Observable<User[]> {
     return of(this.storedUsers).pipe(delay(randomDelay()));
   }
 
-  user(id: number) {
+  user(id: number): Observable<User> {
     return of(this.findUserById(id)).pipe(delay(randomDelay()));
   }
 

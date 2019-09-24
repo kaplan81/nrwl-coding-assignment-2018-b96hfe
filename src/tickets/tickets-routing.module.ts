@@ -1,28 +1,26 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { TicketAddComponent } from './containers/ticket-add/ticket-add.component';
+import { TicketDetailComponent } from './containers/ticket-detail/ticket-detail.component';
 import { TicketsComponent } from './containers/tickets/tickets.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: TicketsComponent,
-    children: [
-      // {
-      //   path: step01Path,
-      //   component: Step01NameComponent,
-      //   data: { selectedIndex: 0 }
-      // },
-      // {
-      //   path: step02Path,
-      //   component: Step02NameComponent,
-      //   data: { selectedIndex: 1 }
-      // },
-      // {
-      //   path: step03Path,
-      //   component: Step03NameComponent,
-      //   data: { selectedIndex: 2 }
-      // }
-    ]
+    redirectTo: 'tickets',
+    pathMatch: 'full'
+  },
+  {
+    path: 'tickets',
+    component: TicketsComponent
+  },
+  {
+    path: 'ticket/:ticketId',
+    component: TicketDetailComponent
+  },
+  {
+    path: 'new-ticket',
+    component: TicketAddComponent
   }
 ];
 

@@ -2,11 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
 
-/**
- * This service acts as a mock back-end.
- * It has some intentional errors that you might have to fix.
- */
-
 export interface User {
   id: number;
   name: string;
@@ -44,36 +39,6 @@ export class BackendService {
   ];
   storedUsers: User[] = [{ id: 111, name: 'Victor' }];
 
-  ticket(id: number): Observable<Ticket> {
-    return of(this.findTicketById(id)).pipe(delay(randomDelay()));
-  }
-
-  tickets(): Observable<Ticket[]> {
-    return of(this.storedTickets).pipe(delay(randomDelay()));
-  }
-
-  users(): Observable<User[]> {
-    return of(this.storedUsers).pipe(delay(randomDelay()));
-  }
-
-  user(id: number): Observable<User> {
-    return of(this.findUserById(id)).pipe(delay(randomDelay()));
-  }
-
-  newTicket(payload: { description: string }) {
-    const newTicket: Ticket = {
-      id: ++this.lastId,
-      description: payload.description,
-      assigneeId: null,
-      completed: false
-    };
-
-    return of(newTicket).pipe(
-      delay(randomDelay()),
-      tap((ticket: Ticket) => this.storedTickets.push(ticket))
-    );
-  }
-
   assign(ticketId: number, userId: number) {
     const foundTicket = this.findTicketById(+ticketId);
     const user = this.findUserById(+userId);
@@ -102,6 +67,36 @@ export class BackendService {
     }
 
     return throwError(new Error('ticket not found'));
+  }
+
+  newTicket(payload: { description: string }) {
+    const newTicket: Ticket = {
+      id: ++this.lastId,
+      description: payload.description,
+      assigneeId: null,
+      completed: false
+    };
+
+    return of(newTicket).pipe(
+      delay(randomDelay()),
+      tap((ticket: Ticket) => this.storedTickets.push(ticket))
+    );
+  }
+
+  ticket(id: number): Observable<Ticket> {
+    return of(this.findTicketById(id)).pipe(delay(randomDelay()));
+  }
+
+  tickets(): Observable<Ticket[]> {
+    return of(this.storedTickets).pipe(delay(randomDelay()));
+  }
+
+  users(): Observable<User[]> {
+    return of(this.storedUsers).pipe(delay(randomDelay()));
+  }
+
+  user(id: number): Observable<User> {
+    return of(this.findUserById(id)).pipe(delay(randomDelay()));
   }
 
   private findTicketById(id: number) {

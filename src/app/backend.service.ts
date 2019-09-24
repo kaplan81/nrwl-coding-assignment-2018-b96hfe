@@ -23,7 +23,9 @@ function randomDelay() {
   return Math.random() * 4000;
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class BackendService {
   storedTickets: Ticket[] = [
     {
@@ -44,7 +46,7 @@ export class BackendService {
 
   lastId = 1;
 
-  constructor() { }
+  constructor() {}
 
   private findTicketById = id =>
     this.storedTickets.find(ticket => ticket.id === +id);

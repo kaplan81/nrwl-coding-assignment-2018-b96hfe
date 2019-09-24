@@ -46,12 +46,6 @@ export class BackendService {
 
   lastId = 1;
 
-  constructor() {}
-
-  private findTicketById = id =>
-    this.storedTickets.find(ticket => ticket.id === +id);
-  private findUserById = id => this.storedUsers.find(user => user.id === +id);
-
   tickets() {
     return of(this.storedTickets).pipe(delay(randomDelay()));
   }
@@ -110,5 +104,13 @@ export class BackendService {
     }
 
     return throwError(new Error('ticket not found'));
+  }
+
+  private findTicketById(id: number) {
+    return this.storedTickets.find((ticket: Ticket) => ticket.id === +id);
+  }
+
+  private findUserById(id: number) {
+    return this.storedUsers.find((user: User) => user.id === +id);
   }
 }

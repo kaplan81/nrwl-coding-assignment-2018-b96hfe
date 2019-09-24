@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { BackendService, Ticket } from '../../../app/backend.service';
@@ -11,11 +11,7 @@ import { BackendService, Ticket } from '../../../app/backend.service';
 export class TicketDetailComponent implements OnInit {
   ticket$: Observable<Ticket>;
 
-  constructor(
-    private backend: BackendService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
+  constructor(private backend: BackendService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.ticket$ = this.route.paramMap.pipe(

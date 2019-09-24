@@ -1,4 +1,6 @@
-<div class="ticket__id">{{ ticket?.id }}</div>
-<div class="ticket__description">{{ ticket?.description }}</div>
-<div class="ticket__assignee">{{ ticket?.assigneeId }}</div>
-<div class="ticket__completed">{{ ticket?.completed }}</div>
+<ng-container *ngIf="ticket">
+  <div class="ticket__id">Ticket ID: {{ ticket.id }}</div>
+  <div class="ticket__description">Description: {{ ticket.description }}</div>
+  <div class="ticket__assignee">Assigned to: {{ ticket.assigneeId }}</div>
+  <div class="ticket__completed">Completed: {{ ticket.completed }}</div>
+</ng-container>

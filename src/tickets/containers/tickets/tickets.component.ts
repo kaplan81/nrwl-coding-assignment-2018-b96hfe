@@ -15,4 +15,12 @@ export class TicketsComponent {
       this.backend.newTicket({ description });
     }
   }
+
+  hasTickets(ticket: any): boolean {
+    if (ticket === undefined || ticket === null) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 }

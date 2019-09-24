@@ -1,18 +1,40 @@
-<h2>Tickets</h2>
+<div class="container">
+  <div class="row">
+    <h2>Tickets</h2>
+  </div>
+  <div class="row" *ngIf="hasTickets(tickets$ | async); else loadingTickets">
+    <ul>
+      <li *ngFor="let ticket of tickets$ | async">
+        <a [routerLink]="['/ticket', ticket.id]"
+          >Ticket: {{ ticket.id }}, {{ ticket.description }}</a
+        >
+      </li>
+    </ul>
+  </div>
 
-<ul>
-  <li *ngFor="let ticket of tickets$ | async">
-    <a [routerLink]="['/ticket', ticket.id]"
-      >Ticket: {{ ticket.id }}, {{ ticket.description }}</a
+  <ng-template #loadingTickets
+    ><div class="row">Loading tickets...</div></ng-template
+  >
+  <br /><br />
+  <div class="row">
+    <input
+      type="text"
+      class="col-9"
+      placeholder="Add a new ticket"
+      #ticketInput
+    />
+    <button
+      type="button"
+      class="col-3 btn btn-primary"
+      (click)="addTicket(ticketInput.value)"
     >
-  </li>
-</ul>
-
-<br /><br /><br />
-
-<input type="text" placeholder="Add a new ticket" #ticketInput />
-<button type="button" (click)="addTicket(ticketInput.value)">Add it!</button>
-
-<br /><br />
-
-<div>*By default, all tickets will be assigned to Victor</div>
+      Add it!
+    </button>
+  </div>
+  <br />
+  <div class="row">
+    <blockquote>
+      *By default, all tickets will be assigned to Victor.
+    </blockquote>
+  </div>
+</div>

@@ -90,7 +90,7 @@ export class BackendService {
     return throwError(new Error('ticket or user not found'));
   }
 
-  complete(ticketId: number, completed: boolean) {
+  complete(ticketId: number) {
     const foundTicket = this.findTicketById(+ticketId);
     if (foundTicket) {
       return of(foundTicket).pipe(

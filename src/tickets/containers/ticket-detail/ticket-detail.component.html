@@ -1,1 +1,10 @@
-TicketDetailComponent!
+<h2>Ticket Detail</h2>
+
+<div
+  class="ticket-detail"
+  *ngIf="hasTicket(ticket$ | async); else loadingTicket"
+>
+  <dem-ticket [ticket]="ticket$ | async"></dem-ticket>
+</div>
+
+<ng-template #loadingTicket>Loading ticket...</ng-template>
